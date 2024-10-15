@@ -22,7 +22,7 @@ error:
     neg     rdi              ; Make the error code positive (for errno)
 
     ; Store errno in the appropriate location
-    call    __errno_location ; Get the address of errno
+    call    __errno_location ; Get the address of errno 
     mov     [rax], rdi       ; Store the error code in errno
 
     ; Return -1 to indicate failure
