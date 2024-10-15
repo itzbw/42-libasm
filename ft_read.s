@@ -12,8 +12,9 @@ section		.text
 global		ft_read
 
 ft_read:
-	mov		rax, 0				; 0 is the syscall id for read
-	syscall
+	;mov		rax, 0				; 0 is the syscall id for read
+	xor     rax, rax
+    syscall
 	test	rax, rax			; set condition codes
 	js		_error				; jump if negative (meaning an error occured)
 	ret

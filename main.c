@@ -61,7 +61,7 @@ void		strcpy_test()
 		"bruno",
 		"test123",
 		"",
-		"zzzzzzzz",
+		"lalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 	};
 
 	int	numStrings = sizeof(str) / sizeof(str[0]);
@@ -96,11 +96,13 @@ void	write_test()
 	int n = strlen(buf);
     // Test 1: Valid buffer
 	errno = 0;
+	printf(BOLD"\nTest 1: Valid buffer\n\n"NC);
 	printf("write() return value \t\t [%zd]\n", write(fd, buf, n));
 	printf("ft_write() return value \t [%zd]\n", ft_write(fd, buf, n));
 	printf("\n");
     // Test 2: Null buffer with zero length
 	errno = 0;
+	printf(BOLD"\nNull buffer with zero length\n\n"NC);
 	printf("write() return value \t\t [%zd]\n", write(fd, NULL, 0));
 	printf("write() errno \t\t\t [%d] \t [%s]\n", errno, strerror(errno));
 	printf("\n");
@@ -110,6 +112,7 @@ void	write_test()
 	printf("\n");
     // Test 3: Invalid file descriptor with NULL buffer
 	errno = 0;
+	printf(BOLD"\nInvalid file descriptor with NULL buffer\n\n"NC);
 	printf("write() return value \t\t [%zd]\n", write(-1, NULL, 0));
 	printf("write() errno \t\t\t [%d] \t [%s]\n", errno, strerror(errno));
 	printf("\n");
@@ -122,18 +125,20 @@ void	write_test()
 void strcmp_test () {
 
 
-    printf(BOLD "\n-----------ft_strcmp----------" NC);
+    printf(BOLD "\n-----------ft_strcmp----------\n" NC);
 
-	char	*strings1[] = {
-		"lalala",
+
+
+char	*strings1[] = {
+		"test123456770797",
 		"1",
 		"test",
-		"\0",
+		"",
 		"zzzzzzzz",
 	};
 
 	char	*strings2[] = {
-		"lala7",
+		"test1234567",
 		"2",
 		"test2",
 		"",
@@ -147,10 +152,9 @@ void strcmp_test () {
 		int	result = ft_strcmp(strings1[i], strings2[i]);
 
 		printf(BOLD "%s" NC " vs "BOLD "%s" NC"\n", strings1[i], strings2[i]);
-		printf(expected == result ? GREEN "OK" NC : RED "KO" NC );
-		printf("\nstrcmp: %d\t ft_strcmp: %d\n\n", expected, result);
+		printf(expected == result ? GREEN "OK" NC : RED "KO" NC);
+		printf("\t Expected: %d\tResult: %d\n\n", expected, result);
 	}
-
 
 }
 
@@ -196,7 +200,7 @@ void	strdup_test(void)
 {
 	printf(BOLD "\nTesting ft_strdup\n" NC);
 
-	char	*strings[] = {
+	const char	*strings[] = {
 		"test",
 		"1",
 		"0",
@@ -205,11 +209,14 @@ void	strdup_test(void)
 		"lalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
 	};
 
+
 	int	numStrings = sizeof(strings) / sizeof(strings[0]);
 
-	for (int i = 0; i < numStrings; i++) {
+	for (size_t i = 0; i < numStrings; i++) {
 		char	*ref_ptr = strdup(strings[i]);
 		char	*test_ptr = ft_strdup(strings[i]);
+
+
 
 		printf(strcmp(ref_ptr, test_ptr) == 0 ? GREEN "COPY OK" NC : RED "COPY KO" NC);
 		printf("\t\tExpected: %s\tResult: %s\n", ref_ptr, test_ptr);
@@ -224,7 +231,9 @@ int main () {
     strcpy_test();
     write_test();
     strcmp_test();
-	read_test();
+read_test();
 	strdup_test();
     return 0;
 }
+
+

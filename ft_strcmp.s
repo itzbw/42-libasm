@@ -1,28 +1,15 @@
-; [Registers]
-; rdi -> char *s1
-; rsi -> char *s2
-; rax -> return value
-; -------------------------------------------
-
-section		.text
-global		ft_strcmp
-
+section     .text
+global      ft_strcmp
 ft_strcmp:
-	mov		rax, 0					; initialise rax to 0
-	mov		rdx, 0					; initialise rdx to 0
-	mov		rcx, -1					; initialise rcx to -1
-
-check:
-	inc		rcx						; rcx becomes 0
-	mov		al, byte[rdi + rcx]		; save current s1 char to al
-	mov		dl, byte[rsi + rcx]		; save current s2 char to dl
-	cmp		al, 0					; check if s1 char is \0
-	je		return					; if \0, go to return process
-	cmp		dl, 0					; check if s2 char is \0
-	je		return					; if \0, go to return process
-	cmp		al, dl					; compare s1 and s2 char
-	je		check					; if equal, start the loop again
-
-return:
-	sub		rax, rdx				; subtract s1 char with s2 char
-	ret								; return value saved in rax
+    xor     rcx, rcx        ; Initialize counter to 0
+.loop:
+    movzx   eax, byte [rdi + rcx]  ; Load byte from s1, zero-extend to 32 bits
+    movzx   edx, byte [rsi + rcx]  ; Load byte from s2, zero-extend to 32 bits
+    inc     rcx             ; Increment counter
+    test    al, al          ; Check if we've reached the end of s1
+    jz      .end            ; If so, jump to end
+    cmp     al, dl          ; Compare characters
+    je      .loop           ; If equal, continue loop
+.end:
+    sub     eax, edx        ; Compute difference
+    ret                     ; Return result in eax

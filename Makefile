@@ -11,6 +11,8 @@ CC = nasm -felf64
 
 OBJS = ${SRCS:.s=.o}
 
+FLAGS	=	-Wall -Wextra -Werror
+
 ${NAME}: ${OBJS}
 	ar rc ${NAME} ${OBJS}
 
@@ -24,6 +26,8 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf a.out
+	rm -rf test_main
 
 re: fclean all
+
+.PHONY: all clean fclean re
